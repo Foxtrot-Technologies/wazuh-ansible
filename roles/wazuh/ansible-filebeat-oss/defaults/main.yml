@@ -15,7 +15,9 @@ elasticsearch_security_user: admin
 elasticsearch_security_password: changeme
 # Security plugin
 filebeat_security: true
+filebeat_ssl_mutualauth: true
 filebeat_ssl_dir: /etc/pki/filebeat
+
 
 # Local path to store the generated certificates (OpenDistro security plugin)
 local_certs_path: ./opendistro/certificates
