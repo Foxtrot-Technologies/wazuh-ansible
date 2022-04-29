@@ -29,28 +29,6 @@
     - not (ansible_os_family|lower == "redhat" and ansible_distribution_major_version|int < 6)
   tags: init
 
-- name: Generate SSL files for authd
-  command: "openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:1825 -keyout sslmanager.key -out sslmanager.cert -subj /CN={{ wazuh_manager_fqdn }}/"
-  args:
-    creates: sslmanager.cert
-    chdir: "{{ wazuh_dir }}/etc/"
-  tags:
-    - config
-  when: wazuh_manager_config.authd.ssl_agent_ca is not none
-
-- name: Copy CA, SSL key and cert for authd
-  copy:
-    src: "{{ item }}"
-    dest: "{{ wazuh_dir }}/etc/{{ item }}"
-    mode: 0644
-  with_items:
-    - "{{ wazuh_manager_config.authd.ssl_agent_ca }}"
-    - "{{ wazuh_manager_config.authd.ssl_manager_cert }}"
-    - "{{ wazuh_manager_config.authd.ssl_manager_key }}"
-  tags:
-    - config
-  when: wazuh_manager_config.authd.ssl_agent_ca is not none
-
 - name: Verifying for old init authd service
   stat: path=/etc/init.d/ossec-authd
   register: old_authd_service
