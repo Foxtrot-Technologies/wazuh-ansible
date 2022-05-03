@@ -11,3 +11,17 @@
       - "{{ kibana_node_name }}_http.pem"
   tags:
   - security
+  when: not ssl_selfsigned
+
+- block:
+  - name: Create private key (RSA, 4096 bits) for Kibana
+    community.crypto.openssl_privatekey:
+      path: "/usr/share/kibana/{{ kibana_node_name }}_http.key"
+  
+  - name: Create self-signed certificate for Kibana
+    community.crypto.x509_certificate:
+      path: "/usr/share/kibana/{{ kibana_node_name }}_http.pem"
+      privatekey_path: "/usr/share/kibana/{{ kibana_node_name }}_http.key"
+      provider: selfsigned
+  
+  when: ssl_selfsigned

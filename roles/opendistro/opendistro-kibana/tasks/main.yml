@@ -114,6 +114,14 @@
     mode: 0751
   changed_when: False
 
+- name: Allow Kibana to listen on privileged ports
+  community.general.capabilities:
+    path: /usr/share/kibana/node/bin/node
+    capability: cap_net_bind_service=+ep
+    state: present
+  when:
+    kibana_server_port|int < 1024
+
 - name: Ensure Kibana started and enabled
   service:
     name: kibana

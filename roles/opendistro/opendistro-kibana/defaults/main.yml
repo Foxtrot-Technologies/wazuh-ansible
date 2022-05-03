@@ -44,6 +44,7 @@ opendistro_admin_password: changeme
 opendistro_kibana_user: kibanaserver
 opendistro_kibana_password: changeme
 local_certs_path: "{{ playbook_dir }}/opendistro/certificates"
+ssl_selfsigned: false
 
 # Nodejs
 nodejs:
@@ -58,3 +59,4 @@ wazuh_plugin_branch: 4.1-7.10
 
 #Nodejs NODE_OPTIONS
 node_options: --no-warnings --max-old-space-size=2048 --max-http-header-size=65536
+
