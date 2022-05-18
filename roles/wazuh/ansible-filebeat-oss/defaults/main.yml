@@ -17,7 +17,12 @@ indexer_security_user: admin
 indexer_security_password: changeme
 # Security plugin
 filebeat_security: true
+filebeat_ssl_mutualauth: true
 filebeat_ssl_dir: /etc/pki/filebeat
+enable_archives: false
+
+alerts_index_prefix: wazuh-alerts-4.x-
+archives_index_prefix: wazuh-archives-4.x-
 
 # Local path to store the generated certificates (Opensearch security plugin)
 local_certs_path: "{{ playbook_dir }}/indexer/certificates"
