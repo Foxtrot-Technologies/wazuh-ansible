@@ -690,4 +690,25 @@
     <hidden>{{ wazuh_manager_config.cluster.hidden }}</hidden>
   </cluster>
 
+{% if wazuh_office365 is defined %}
+  <office365>
+    <enabled>yes</enabled>
+    <interval>1m</interval>
+    <curl_max_size>1M</curl_max_size>
+    <only_future_events>yes</only_future_events>
+    <api_auth>
+        <tenant_id>{{ wazuh_office365.tenant_id }}</tenant_id>
+        <client_id>{{ wazuh_office365.client_id }}</client_id>
+        <client_secret>{{ wazuh_office365.client_secret }}</client_secret>
+    </api_auth>
+    <subscriptions>
+        <subscription>Audit.AzureActiveDirectory</subscription>
+        <subscription>Audit.Exchange</subscription>
+        <subscription>Audit.Sharepoint</subscription>
+        <subscription>Audit.General</subscription>
+        <subscription>DLP.All</subscription>
+    </subscriptions>
+  </office365>
+{% endif %}
+
 </ossec_config>
