@@ -711,4 +711,53 @@
   </office365>
 {% endif %}
 
+{% if wazuh_azure is defined or wazuh_office365 is defined %}
+
+  <wodle name="azure-logs">
+    <disabled>no</disabled>
+    <interval>1h</interval>
+    <run_on_start>yes</run_on_start>
+
+    {% if wazuh_azure is defined %}
+    <storage>
+       <tag>azure-activity</tag>
+       <account_name>{{ wazuh_azure.storage_account_name }}</account_name>
+       <account_key>{{ wazuh_azure.storage_account_key }}</account_key>
+
+       <container name="insights-activity-logs">
+          <blobs>.json</blobs>
+          <content_type>json_inline</content_type>
+          <time_offset>1h</time_offset>
+       </container>
+    </storage>
+    {% endif %}
+    
+    {% if wazuh_office365 is defined %}
+    <graph>
+
+      <application_id>{{ wazuh_office365.client_id }}</application_id>
+      <application_key>{{ wazuh_office365.client_secret }}</application_key>
+      <tenantdomain>{{ wazuh_office365.tenant_domain }}</tenantdomain>
+      <request>
+        <tag>azure-ad-directoryAudits</tag>
+        <query>auditLogs/directoryAudits</query>
+        <time_offset>1h</time_offset>
+      </request>
+      <request>
+        <tag>azure-ad-signIns</tag>
+        <query>auditLogs/signIns</query>
+        <time_offset>1h</time_offset>
+      </request>
+      <request>
+        <tag>azure-ad-provisioning</tag>
+        <query>auditLogs/provisioning</query>
+        <time_offset>1h</time_offset>
+      </request>
+
+    </graph>
+    {% endif %}
+
+  </wodle>
+{% endif %}
+
 </ossec_config>
