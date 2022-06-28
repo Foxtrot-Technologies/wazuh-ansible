@@ -166,6 +166,20 @@ wazuh_manager_monitor_aws:
       access_key: null
       secret_key: null
 
+wazuh_manager_office365:
+  tenant_id: null
+  tenant_domain: null
+  client_id: null
+  client_secret: null
+
+wazuh_manager_azure:
+  storage_account_name: null
+  storage_account_key: null 
+
+wazuh_manager_command_wodles:
+  - tag: null
+    command: null
+
 ## SCA
 wazuh_manager_sca:
   enabled: 'yes'
@@ -461,6 +475,9 @@ wazuh_manager_config_defaults:
   labels: '{{ wazuh_manager_labels }}'
   agents_disconnection_time: '{{ wazuh_manager_agent_disconnection_time }}'
   agents_disconnection_alert_time: '{{ wazuh_manager_agents_disconnection_alert_time }}'
+  office365: '{{ wazuh_manager_office365 }}'
+  azure: '{{ wazuh_manager_azure }}'
+  command_wodles: '{{ wazuh_manager_command_wodles }}'
 
 # shared-agent.conf
 

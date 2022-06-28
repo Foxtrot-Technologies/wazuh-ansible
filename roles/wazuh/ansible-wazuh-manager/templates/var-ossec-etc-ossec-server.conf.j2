@@ -690,16 +690,16 @@
     <hidden>{{ wazuh_manager_config.cluster.hidden }}</hidden>
   </cluster>
 
-{% if wazuh_office365 is defined %}
+{% if wazuh_manager_config.office365 is defined and wazuh_manager_config.office365.tenant_id is not none %}
   <office365>
     <enabled>yes</enabled>
     <interval>1m</interval>
     <curl_max_size>1M</curl_max_size>
     <only_future_events>yes</only_future_events>
     <api_auth>
-        <tenant_id>{{ wazuh_office365.tenant_id }}</tenant_id>
-        <client_id>{{ wazuh_office365.client_id }}</client_id>
-        <client_secret>{{ wazuh_office365.client_secret }}</client_secret>
+        <tenant_id>{{ wazuh_manager_config.office365.tenant_id }}</tenant_id>
+        <client_id>{{ wazuh_manager_config.office365.client_id }}</client_id>
+        <client_secret>{{ wazuh_manager_config.office365.client_secret }}</client_secret>
     </api_auth>
     <subscriptions>
         <subscription>Audit.AzureActiveDirectory</subscription>
@@ -711,18 +711,18 @@
   </office365>
 {% endif %}
 
-{% if wazuh_azure is defined or wazuh_office365 is defined %}
+{% if (wazuh_manager_config.azure is defined and wazuh_manager.azure.storage_account_name is not none) or (wazuh_manager_config.office365 is defined and wazuh_manager_config.office365.tenant_id is not none) %}
 
   <wodle name="azure-logs">
     <disabled>no</disabled>
     <interval>1h</interval>
     <run_on_start>yes</run_on_start>
 
-    {% if wazuh_azure is defined %}
+    {% if wazuh_manager_config.azure is defined and wazuh_manager_config.azure.storage_account_name is not none %}
     <storage>
        <tag>azure-activity</tag>
-       <account_name>{{ wazuh_azure.storage_account_name }}</account_name>
-       <account_key>{{ wazuh_azure.storage_account_key }}</account_key>
+       <account_name>{{ wazuh_manager_config.azure.storage_account_name }}</account_name>
+       <account_key>{{ wazuh_manager_config.azure.storage_account_key }}</account_key>
 
        <container name="insights-activity-logs">
           <blobs>.json</blobs>
@@ -732,12 +732,12 @@
     </storage>
     {% endif %}
     
-    {% if wazuh_office365 is defined %}
+    {% if wazuh_manager_config.office365 is defined and wazuh_manager_config.office365.tenant_domain is not none %}
     <graph>
 
-      <application_id>{{ wazuh_office365.client_id }}</application_id>
-      <application_key>{{ wazuh_office365.client_secret }}</application_key>
-      <tenantdomain>{{ wazuh_office365.tenant_domain }}</tenantdomain>
+      <application_id>{{ wazuh_manager_config.office365.client_id }}</application_id>
+      <application_key>{{ wazuh_manager_config.office365.client_secret }}</application_key>
+      <tenantdomain>{{ wazuh_manager_config.office365.tenant_domain }}</tenantdomain>
       <request>
         <tag>azure-ad-directoryAudits</tag>
         <query>auditLogs/directoryAudits</query>
@@ -759,5 +759,51 @@
 
   </wodle>
 {% endif %}
+
+
+{% if wazuh_manager_config.command_wodles is defined %}
+  {% for command in wazuh_manager_config.command_wodles %}
+  {% if command.command is not none %}
+  <wodle name="command">
+    <tag>{{ command.tag }}</tag>
+    <command>{{ command.command }}</command>
+    {% if command.ignore_output is defined %}
+    <ignore_output>{{ command.ignore_output }}</ignore_output>
+    {% endif %}
+    {% if command.timeout is defined %}
+    <timeout>{{ command.timeout }}</timeout>
+    {% endif %}
+    {% if command.verify_md5 is defined %}
+    <verify_md5>{{ command.verify_md5 }}</verify_md5>
+    {% endif %}
+    {% if command.verify_sha1 is defined %}
+    <verify_sha1>{{ command.verify_sha1 }}</verify_sha1>
+    {% endif %}
+    {% if command.verify_sha256 is defined %}
+    <verify_sha256>{{ command.verify_sha256 }}</verify_sha256>
+    {% endif %}
+    {% if command.skip_verification is defined %}
+    <skip_verification>{{ command.skip_verification }}</skip_verification>
+    {% endif %}
+    {% if command.run_on_start is defined %}
+    <run_on_start>{{ command.run_on_start }}</run_on_start>
+    {% endif %}
+    {% if command.interval is defined %}
+    <interval>{{ command.interval }}</interval>
+    {% endif %}
+    {% if command.day is defined %}
+    <day>{{ command.day }}</day>
+    {% endif %}
+    {% if command.wday is defined %}
+    <wday>{{ command.wday }}</wday>
+    {% endif %}
+    {% if command.time is defined %}
+    <time>{{ command.time }}</time>
+    {% endif %}
+  </wodle>
+  {% endif %}
+  {% endfor %}
+{% endif %}
+
 
 </ossec_config>
