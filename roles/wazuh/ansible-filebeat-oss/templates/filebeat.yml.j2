@@ -21,6 +21,9 @@ output.elasticsearch:
   - {{ item }}
 {% endfor %}
 
+  bulk_max_size: 2000
+  workers: 2
+
 {% if filebeat_security %}
   username: {{ indexer_security_user }}
   password: {{ indexer_security_password }}
