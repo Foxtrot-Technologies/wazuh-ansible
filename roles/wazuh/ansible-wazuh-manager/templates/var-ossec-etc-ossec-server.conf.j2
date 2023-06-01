@@ -763,7 +763,7 @@
 
 {% if wazuh_manager_config.command_wodles is defined %}
   {% for command in wazuh_manager_config.command_wodles %}
-  {% if command.command is not none %}
+  {% if (command.command is not none) and (command.command|length > 0) %}
   <wodle name="command">
     <tag>{{ command.tag }}</tag>
     <command>{{ command.command }}</command>
