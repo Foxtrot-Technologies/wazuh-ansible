@@ -8,22 +8,12 @@ dashboard_node_name: node-1
 dashboard_server_host: "0.0.0.0"
 dashboard_server_port: "443"
 dashboard_server_name: "dashboard"
-wazuh_version: 4.3.0
+wazuh_version: 4.5.1
 indexer_cluster_nodes:
   - 127.0.0.1
-  
-# The Wazuh dashboard package repository
-dashboard_version: "4.3.0"
 
-package_repos:
-  yum:
-    dashboard:
-      baseurl: 'https://packages.wazuh.com/4.x/yum/'
-      gpg: 'https://packages.wazuh.com/key/GPG-KEY-WAZUH'
-  apt:
-    dashboard:
-      baseurl: 'deb https://packages.wazuh.com/4.x/apt/ stable main'
-      gpg: 'https://packages.wazuh.com/key/GPG-KEY-WAZUH'
+# The Wazuh dashboard package repository
+dashboard_version: "4.5.1"
 
 # API credentials
 wazuh_api_credentials:

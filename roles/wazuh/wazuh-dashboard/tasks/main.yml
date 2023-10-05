@@ -1,4 +1,14 @@
 ---
+- include_vars: ../../vars/repo_vars.yml
+
+- include_vars: ../../vars/repo.yml
+  when: packages_repository == 'production'
+
+- include_vars: ../../vars/repo_pre-release.yml
+  when: packages_repository == 'pre-release'
+
+- include_vars: ../../vars/repo_staging.yml
+  when: packages_repository == 'staging'
 
 - import_tasks: RedHat.yml
   when: ansible_os_family == 'RedHat'
@@ -74,7 +84,7 @@
 
 - name: Configure opensearch.password in opensearch_dashboards.keystore
   shell: >-
-    echo {{ dashboard_password }} | /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore --allow-root add -f --stdin opensearch.password
+    echo '{{ dashboard_password }}' | /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore --allow-root add -f --stdin opensearch.password
   args:
     executable: /bin/bash
   become: yes

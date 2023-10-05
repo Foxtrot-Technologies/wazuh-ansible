@@ -1,19 +1,31 @@
 ---
 
-- name: Overlay wazuh_manager_config on top of defaults
-  set_fact:
-    wazuh_manager_config: '{{ wazuh_manager_config_defaults | combine(config_layer, recursive=True) }}'
-  vars:
-    config_layer: '{{ wazuh_manager_config | default({}) }}'
-  when: wazuh_manager_config_overlay | bool
-
 - name: "Install dependencies"
   package:
     name:
       - unzip
       - openssl
       - tar
+      - curl
     state: present
+
+- include_vars: ../../vars/repo_vars.yml
+
+- include_vars: ../../vars/repo.yml
+  when: packages_repository == 'production'
+
+- include_vars: ../../vars/repo_pre-release.yml
+  when: packages_repository == 'pre-release'
+
+- include_vars: ../../vars/repo_staging.yml
+  when: packages_repository == 'staging'
+
+- name: Overlay wazuh_manager_config on top of defaults
+  set_fact:
+    wazuh_manager_config: '{{ wazuh_manager_config_defaults | combine(config_layer, recursive=True) }}'
+  vars:
+    config_layer: '{{ wazuh_manager_config | default({}) }}'
+  when: wazuh_manager_config_overlay | bool
 
 - include_tasks: "RedHat.yml"
   when: (ansible_os_family == "RedHat" and ansible_distribution_major_version|int > 5) or (ansible_os_family  == "RedHat" and ansible_distribution == "Amazon")
@@ -26,7 +38,8 @@
     name: expect
     state: "{{ wazuh_manager_package_state }}"
   when:
-    - not (ansible_os_family|lower == "redhat" and ansible_distribution_major_version|int < 6)
+    - not (ansible_os_family|lower == "redhat" and ansible_distribution_major_version|int < 6) and
+      not (ansible_distribution|lower == "centos" and ansible_distribution_major_version|int == 8)
   tags: init
 
 - name: Verifying for old init authd service

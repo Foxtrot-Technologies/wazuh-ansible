@@ -1,11 +1,131 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [v4.5.1]
+
+### Added
+
+- Update to [Wazuh v4.5.1](https://github.com/wazuh/wazuh/blob/v4.5.1/CHANGELOG.md#v451)
+
+## [v4.5.0]
+
+### Added
+
+- Update to [Wazuh v4.5.0](https://github.com/wazuh/wazuh/blob/v4.5.0/CHANGELOG.md#v450)
+
+## [v4.4.5]
+
+### Added
+
+- Update to [Wazuh v4.4.5](https://github.com/wazuh/wazuh/blob/v4.4.5/CHANGELOG.md#v445)
+
+## [v4.4.4]
+
+### Added
+
+- Update to [Wazuh v4.4.4](https://github.com/wazuh/wazuh/blob/v4.4.4/CHANGELOG.md#v444)
+
+## [v4.4.3]
+
+### Added
+
+- Update to [Wazuh v4.4.3](https://github.com/wazuh/wazuh/blob/v4.4.3/CHANGELOG.md#v443)
+
+## [v4.4.2]
+
+### Added
+
+- Update to [Wazuh v4.4.2](https://github.com/wazuh/wazuh/blob/v4.4.2/CHANGELOG.md#v442)
+
+## [v4.4.1]
+
+### Added
+
+- Update to [Wazuh v4.4.1](https://github.com/wazuh/wazuh/blob/v4.4.1/CHANGELOG.md#v441)
+
+## [v4.4.0]
+
+### Added
+
+- Update to [Wazuh v4.4.0](https://github.com/wazuh/wazuh/blob/v4.4.0/CHANGELOG.md#v440)
+
+## [v4.3.11]
+
+### Added
+
+- Update to [Wazuh v4.3.11](https://github.com/wazuh/wazuh/blob/v4.3.11/CHANGELOG.md#v4311)
+
+## [v4.3.10]
+
+### Added
+
+- Update to [Wazuh v4.3.10](https://github.com/wazuh/wazuh/blob/v4.3.10/CHANGELOG.md#v4310)
+
+## [v4.3.9]
+
+### Added
+
+- Update to [Wazuh v4.3.9](https://github.com/wazuh/wazuh/blob/v4.3.9/CHANGELOG.md#v439)
+
+## [v4.3.8]
+
+### Added
+
+- Update to [Wazuh v4.3.8](https://github.com/wazuh/wazuh/blob/v4.3.8/CHANGELOG.md#v438)
+
+## [v4.3.7]
+
+### Added
+
+- Update to [Wazuh v4.3.7](https://github.com/wazuh/wazuh/blob/v4.3.7/CHANGELOG.md#v437)
+
+## [v4.3.6]
+
+### Added
+
+- Update to [Wazuh v4.3.6](https://github.com/wazuh/wazuh/blob/v4.3.6/CHANGELOG.md#v436)
+
+## [v4.3.5]
+
+### Added
+
+- Update to [Wazuh v4.3.5](https://github.com/wazuh/wazuh/blob/v4.3.5/CHANGELOG.md#v435)
+
+## [v4.3.4]
+
+### Added
+
+- Update to [Wazuh v4.3.4](https://github.com/wazuh/wazuh/blob/v4.3.4/CHANGELOG.md#v434)
+
+## [v4.3.3]
+
+### Added
+
+- Update to [Wazuh v4.3.3](https://github.com/wazuh/wazuh/blob/v4.3.3/CHANGELOG.md#v433)
+
+## [v4.3.2]
+
+### Added
+
+- Update to [Wazuh v4.3.2](https://github.com/wazuh/wazuh/blob/v4.3.2/CHANGELOG.md#v432)
+
+## [v4.3.1]
+
+### Added
+
+- Update to [Wazuh v4.3.1](https://github.com/wazuh/wazuh/blob/v4.3.1/CHANGELOG.md#v431)
+
 ## [v4.3.0]
 
 ### Added
 
 - Update to [Wazuh v4.3.0](https://github.com/wazuh/wazuh/blob/v4.3.0/CHANGELOG.md#v430)
+
+## [v4.2.6]
+
+### Added
+
+- Update to [Wazuh v4.2.6](https://github.com/wazuh/wazuh/blob/v4.2.6/CHANGELOG.md#v426)
 
 ## [v4.2.5]
 
@@ -68,7 +188,7 @@ All notable changes to this project will be documented in this file.
 - Update to [Wazuh v4.1.1](https://github.com/wazuh/wazuh/blob/v4.1.1/CHANGELOG.md#v411)
 - Apply changes in ossec.conf file
 - Modify jvm.options to [v7.10](https://www.elastic.co/guide/en/elasticsearch/reference/7.10/jvm-options.html)
-- Change opendistro repository packages (opendistroforelasticsearch, elasticsearch-oss) to Wazuh URL and GPG key 
+- Change opendistro repository packages (opendistroforelasticsearch, elasticsearch-oss) to Wazuh URL and GPG key
 
 ## [v4.0.4]
 

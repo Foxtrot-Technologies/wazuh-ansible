@@ -1,7 +1,7 @@
 ---
 #
 # Wazuh app - App configuration file
-# Copyright (C) 2015-2019 Wazuh, Inc.
+# Copyright (C) 2016, Wazuh Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -130,6 +130,6 @@ hosts:
       url: {{ api['url'] }}
       port: {{ api['port'] }}
       username: {{ api['username'] }}
-      password: {{ api['password'] }}
+      password: "{{ api['password'] }}"
       run_as: true 
 {% endfor %}
