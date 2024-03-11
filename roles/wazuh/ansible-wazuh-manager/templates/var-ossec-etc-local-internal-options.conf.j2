@@ -10,3 +10,8 @@
 
 # This is the template of Ansible for the file local_internal_options.conf
 # In this file you could include the configuration settings for your manager
+{% if wazuh_manager_config.local_internal_options is defined %}
+{% for key,value in wazuh_manager_config.local_internal_options.items() %}
+{{key}}={{value}}
+{% endfor %}
+{% endif %}
