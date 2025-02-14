@@ -28,14 +28,16 @@ output.elasticsearch:
   username: {{ indexer_security_user }}
   password: "{{ indexer_security_password }}"
   protocol: https
-
-  {% if filebeat_ssl_mutualauth %}
-    ssl.certificate_authorities:
-      - {{ filebeat_ssl_dir }}/root-ca.pem
-    ssl.certificate: "{{ filebeat_ssl_dir }}/{{ filebeat_node_name }}.pem"
-    ssl.key: "{{ filebeat_ssl_dir }}/{{ filebeat_node_name }}.key"
-  {% endif %}
 {% endif %}
+
+{% if filebeat_ssl_mutualauth %}
+  ssl.certificate_authorities:
+    - {{ filebeat_ssl_dir }}/root-ca.pem
+  ssl.certificate: "{{ filebeat_ssl_dir }}/{{ filebeat_node_name }}.pem"
+  ssl.key: "{{ filebeat_ssl_dir }}/{{ filebeat_node_name }}-key.pem"
+  ssl.verification_mode: "certificate"
+{% endif %}
+
 
 # Optional. Send events to Logstash instead of Wazuh indexer
 #output.logstash.hosts: ["YOUR_LOGSTASH_SERVER_IP:5000"]
