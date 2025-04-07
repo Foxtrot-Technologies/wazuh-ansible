@@ -1,17 +1,38 @@
 ---
 
 - name: "Install dependencies"
-  package:
-    name:
-      - unzip
-      - openssl
-      - tar
-      - curl
-    state: present
-  register: package_status
-  until: "package_status is not failed"  
-  retries: 10
-  delay: 10
+  block:
+    - name: "Install common dependencies"
+      package:
+        name:
+          - unzip
+          - openssl
+          - tar
+        state: present
+      register: package_status
+      until: "package_status is not failed"  
+      retries: 10
+      delay: 10
+
+    - name: "Install curl"
+      package:
+        name: curl
+        state: present
+      when: ansible_distribution != "Amazon" and ansible_distribution_version != "2023"
+      register: package_status
+      until: "package_status is not failed"  
+      retries: 10
+      delay: 10
+
+    - name: "Install curl minimal in AL2023"
+      package:
+        name: curl-minimal
+        state: present
+      when: ansible_distribution == "Amazon" and ansible_distribution_version == "2023"
+      register: package_status
+      until: "package_status is not failed"  
+      retries: 10
+      delay: 10
 
 - include_vars: ../../vars/repo_vars.yml
 
@@ -94,7 +115,7 @@
             dest="{{ wazuh_dir }}/etc/rules/local_rules.xml"
             owner=wazuh
             group=wazuh
-            mode=0640
+            mode=0660
   notify: restart wazuh-manager
   tags:
     - init
@@ -106,7 +127,7 @@
         dest="{{ wazuh_dir }}/etc/rules/"
         owner=wazuh
         group=wazuh
-        mode=0640
+        mode=0660
   notify: restart wazuh-manager
   tags:
     - init
@@ -118,7 +139,7 @@
             dest="{{ wazuh_dir }}/etc/decoders/local_decoder.xml"
             owner=wazuh
             group=wazuh
-            mode=0640
+            mode=0660
   notify: restart wazuh-manager
   tags:
     - init
@@ -130,7 +151,7 @@
         dest="{{ wazuh_dir }}/etc/decoders/"
         owner=wazuh
         group=wazuh
-        mode=0640
+        mode=0660
   notify: restart wazuh-manager
   tags:
     - init
@@ -143,7 +164,7 @@
     dest: "{{ wazuh_dir }}/etc/shared/default/agent.conf"
     owner: wazuh
     group: wazuh
-    mode: 0640
+    mode: 0660
     validate: "{{ wazuh_dir }}/bin/verify-agent-conf -f %s"
   notify: restart wazuh-manager
   tags:
@@ -287,6 +308,11 @@
         executable: "{{ wazuh_dir }}/framework/python/bin/python3"
       with_items:
         - "{{ wazuh_api_users }}"
+
+    - name: Delete create_user script
+      file:
+        path: "{{ wazuh_dir }}/framework/scripts/create_user.py"
+        state: absent
 
   tags:
     - config_api_users

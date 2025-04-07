@@ -1,6 +1,106 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [4.11.2]
+
+### Added
+
+- None
+
+### Changed
+
+- None
+
+### Fixed
+
+- None
+
+### Deleted
+
+- None
+
+## [4.11.1]
+
+### Added
+
+- None
+
+### Changed
+
+- None
+
+### Fixed
+
+- None
+
+### Deleted
+
+- None
+
+## [4.11.0]
+
+### Added
+
+- None
+
+### Changed
+
+- Add Yum lock timeout to Ansible task ([#1511](https://github.com/wazuh/wazuh-ansible/pull/1511))
+
+### Fixed
+
+- None
+
+### Deleted
+
+- None
+
+## [v4.10.1]
+
+### Added
+
+- Update to [Wazuh v4.10.1](https://github.com/wazuh/wazuh/blob/v4.10.1/CHANGELOG.md#v4101)
+
+## [v4.10.0]
+
+### Added
+
+- Update to [Wazuh v4.10.0](https://github.com/wazuh/wazuh/blob/v4.10.0/CHANGELOG.md#v4100)
+
+### Fixed
+
+- Fix cert gen tool version variable assignment ([#1443](https://github.com/wazuh/wazuh-ansible/pull/1443))
+
+## [v4.9.2]
+
+### Added
+
+- Update to [Wazuh v4.9.2](https://github.com/wazuh/wazuh/blob/v4.9.2/CHANGELOG.md#v492)
+
+## [v4.9.1]
+
+### Added
+
+- Update to [Wazuh v4.9.1](https://github.com/wazuh/wazuh/blob/v4.9.1/CHANGELOG.md#v491)
+
+## [v4.9.0]
+
+### Added
+
+- Update to [Wazuh v4.9.0](https://github.com/wazuh/wazuh/blob/v4.9.0/CHANGELOG.md#v490)
+
+## [v4.8.2]
+
+### Added
+
+- Update to [Wazuh v4.8.2](https://github.com/wazuh/wazuh/blob/v4.8.2/CHANGELOG.md#v482)
+
+## [v4.8.1]
+
+### Added
+
+- Update to [Wazuh v4.8.1](https://github.com/wazuh/wazuh/blob/v4.8.1/CHANGELOG.md#v481)
+
 ## [v4.8.0]
 
 ### Added
