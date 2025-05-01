@@ -13,3 +13,8 @@ server.ssl.key: "/etc/wazuh-dashboard/certs/{{ dashboard_node_name }}-key.pem"
 server.ssl.certificate: "/etc/wazuh-dashboard/certs/{{ dashboard_node_name }}.pem"
 opensearch.ssl.certificateAuthorities: ["/etc/wazuh-dashboard/certs/root-ca.pem"]
 uiSettings.overrides.defaultRoute: /app/wz-home
+{% if saml_sso_enabled %}
+opensearch_security.auth.type: "saml"
+server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
+opensearch_security.session.keepalive: false
+{% endif %}
