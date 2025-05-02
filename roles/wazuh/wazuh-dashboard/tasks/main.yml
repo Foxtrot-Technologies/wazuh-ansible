@@ -58,6 +58,7 @@
   uri:
     url: "{{ indexer_api_protocol }}://{{ indexer_network_host }}:{{ indexer_http_port }}/.wazuh"
     method: DELETE
+    force_basic_auth: true
     user: "admin"
     password: "{{ indexer_admin_password }}"
     validate_certs: no
