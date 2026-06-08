@@ -1,6 +1,6 @@
 ---
 # Cluster Settings
-indexer_version: 4.11.2
+indexer_version: 4.14.5
 
 single_node: false
 indexer_node_name: node-1
@@ -13,7 +13,7 @@ indexer_node_ingest: true
 indexer_start_timeout: 90
 
 indexer_cluster_nodes:
-  - 127.0.0.1
+  - "{{ indexer_node_name }}"
 indexer_discovery_nodes:
   - 127.0.0.1
 

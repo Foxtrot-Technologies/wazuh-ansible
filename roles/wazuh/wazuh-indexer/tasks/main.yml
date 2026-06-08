@@ -16,10 +16,10 @@
 
 - block:
     - import_tasks: RedHat.yml
-      when: ansible_os_family == 'RedHat'
+      when: ansible_facts.os_family == 'RedHat'
 
     - import_tasks: Debian.yml
-      when: ansible_os_family == 'Debian'
+      when: ansible_facts.os_family == 'Debian'
 
     - name: Remove performance analyzer plugin from Wazuh indexer
       become: true
@@ -108,7 +108,8 @@
       delay: 5
       tags: debug
       when:
-        - hostvars[inventory_hostname]['private_ip'] is not defined or not hostvars[inventory_hostname]['private_ip']
+        - hostvars[inventory_hostname]['private_ip'] is not defined or
+          (hostvars[inventory_hostname]['private_ip'] | length) == 0
 
     - name: Wait for Wazuh indexer API (Private IP)
       uri:
@@ -128,10 +129,11 @@
       delay: 5
       tags: debug
       when:
-        - hostvars[inventory_hostname]['private_ip'] is defined and hostvars[inventory_hostname]['private_ip']
+        - hostvars[inventory_hostname]['private_ip'] is defined and
+          (hostvars[inventory_hostname]['private_ip'] | length) > 0
 
     - import_tasks: "RMRedHat.yml"
-      when: ansible_os_family == "RedHat"
+      when: ansible_facts.os_family == "RedHat"
 
     - name: Reload systemd configuration
       systemd:
