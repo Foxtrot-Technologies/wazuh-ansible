@@ -16,9 +16,8 @@ uiSettings.overrides.defaultRoute: /app/wz-home
 {% if saml_sso_enabled %}
 opensearch_security.auth.type: "saml"
 server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
-opensearch_security.session.keepalive: false
+opensearch_security.session.keepalive: true
 {% endif %}
 # Session expiration settings
 opensearch_security.cookie.ttl: 900000
 opensearch_security.session.ttl: 900000
-opensearch_security.session.keepalive: true
